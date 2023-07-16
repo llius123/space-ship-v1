@@ -1,3 +1,10 @@
-[] Crear un PIXI.Container y meter el sprite dentro
+[]-Tener una UI de ayuda?
+    Ver los sprites que hay.
+    Posicion del mouse.
+[]-Que el sprite dispare
+[]-Añadirle vida a la ship
+[]-Ver las diferencias entre el sprite ship vs monster
+    Ver que cosas tienen en comun y que cosas se pueden extraer para generar una clase generica
+[X]-Crear un PIXI.Container y meter el sprite dentro
     Creo que con esto se podra solucionar el problema del rectangulo
     desposicionado con relacion al sprite
