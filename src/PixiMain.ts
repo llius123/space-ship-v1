@@ -22,4 +22,8 @@ export class PixiMain {
   public addListenerToTick(listener: () => void) {
     this._app.ticker.add(listener);
   }
+
+  public addElementToMainScene(childContainer: PIXI.Container): void {
+    this._app.stage.addChild(childContainer);
+  }
 }
