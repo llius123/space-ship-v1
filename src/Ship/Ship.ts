@@ -110,11 +110,11 @@ export class Ship {
     this._container.angle = degrees - 90;
   }
 
-  public click(callback: () => void) {
+  public click(callback: (angle: number) => void) {
     if (!this.clicked) {
       return;
     }
-    callback();
+    callback(this._container.angle);
 
     this.clicked = false;
   }

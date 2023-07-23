@@ -24,6 +24,8 @@ export class PixiMain {
   }
 
   public addElementToMainScene(childContainer: PIXI.Container): void {
+    childContainer.position.x = this._app.screen.width / 2;
+    childContainer.position.y = this._app.screen.height / 2;
     this._app.stage.addChild(childContainer);
   }
 }
