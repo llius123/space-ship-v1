@@ -8,8 +8,23 @@ export class Bullet {
   private _icon: PIXI.Texture;
 
   private _readyToMove = false;
+  private mousePosition: { x: number; y: number } = { x: 0, y: 0 };
+  private _direction: PIXI.Point = new PIXI.Point();
 
-  constructor() {}
+  constructor(public document: Document) {
+    this.movementConfig();
+  }
+  private movementConfig() {
+    const handleMouseMove = (event: MouseEvent) => {
+      this.mousePosition = {
+        x: event.clientX,
+        y: event.clientY,
+      };
+    };
+
+    this.document.addEventListener("mousemove", handleMouseMove);
+  }
+
   public async setup() {
     this._icon = await PIXI.Assets.load(SpriteIcon);
     this._sprite = PIXI.Sprite.from(this._icon);
@@ -34,37 +49,36 @@ export class Bullet {
   }
 
   public move() {
+    const speed = 10;
     if (!this._readyToMove) {
       return;
     }
 
-    if (Math.sign(this._container.angle) === 1) {
-      //Bottom left
-      this._container.y += 5;
-      this._container.x -= 5;
-    } else if (this._container.angle < -90) {
-      if (this._container.angle < -180) {
-        // Top left
-        this._container.y -= 5;
-        this._container.x -= 5;
-      } else if (this._container.angle > -180) {
-        // Top right
-        this._container.y -= 5;
-        this._container.x += 5;
-      }
-    } else {
-      // Bottom right
-      this._container.y += 5;
-      this._container.x += 5;
-    }
+    // Normalize the direction vector
+    const length = Math.sqrt(
+      this._direction.x * this._direction.x +
+        this._direction.y * this._direction.y
+    );
+    this._direction.x /= length;
+    this._direction.y /= length;
 
-    console.log(this._container.angle);
-    // this._container.y += 5;
-    // this._container.x += 5;
+    this._container.x += this._direction.x * speed;
+    this._container.y += this._direction.y * speed;
   }
 
-  public readyToMove(angle: number) {
+  public readyToMove(angle: number, position: PIXI.ObservablePoint) {
+    this._container.position = position;
     this._container.angle = angle;
     this._readyToMove = true;
+
+    this._direction.x = this.mousePosition.x - this._container.x;
+    this._direction.y = this.mousePosition.y - this._container.y;
+
+    this.rotateCenterContainer();
+  }
+
+  private rotateCenterContainer() {
+    this._container.pivot.x = this._container.width / 2;
+    this._container.pivot.y = this._container.width / 2;
   }
 }

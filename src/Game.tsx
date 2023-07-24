@@ -6,7 +6,7 @@ function Game({ container }: { container: any }) {
   const pixiMain: PixiMain = new PixiMain(container);
 
   const ship = new Ship(document);
-  const bullet = new Bullet();
+  const bullet = new Bullet(document);
   bullet.setup();
 
   new Promise(async (resolve) => {
@@ -19,10 +19,11 @@ function Game({ container }: { container: any }) {
     ship.rotate();
     ship.click(() => {
       pixiMain.addElementToMainScene(bullet.container);
-      bullet.readyToMove(ship.container.angle);
+      bullet.readyToMove(ship.container.angle, ship.container.position);
     });
     bullet.move();
   });
+
   return <></>;
 }
 export default Game;
