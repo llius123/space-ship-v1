@@ -2,9 +2,9 @@ import * as PIXI from "pixi.js";
 
 export class PixiMain {
   private _app: PIXI.Application<HTMLCanvasElement>;
-  private container: HTMLElement | null;
+  private _container: HTMLElement | null;
   constructor(container: HTMLDivElement) {
-    this.container = container;
+    this._container = container;
 
     this._app = new PIXI.Application<HTMLCanvasElement>({
       background: "#1099bb",
@@ -12,7 +12,7 @@ export class PixiMain {
     });
     this._app.view.id = "Game";
 
-    this.container.appendChild(this._app.view);
+    this._container.appendChild(this._app.view);
   }
 
   public get pixi(): PIXI.Application<HTMLCanvasElement> {
@@ -20,6 +20,7 @@ export class PixiMain {
   }
 
   public addListenerToTick(listener: () => void) {
+    console.log("PixiMain ticker", this._app);
     this._app.ticker.add(listener);
   }
 
