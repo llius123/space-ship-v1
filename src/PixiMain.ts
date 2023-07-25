@@ -20,7 +20,6 @@ export class PixiMain {
   }
 
   public addListenerToTick(listener: () => void) {
-    console.log("PixiMain ticker", this._app);
     this._app.ticker.add(listener);
   }
 

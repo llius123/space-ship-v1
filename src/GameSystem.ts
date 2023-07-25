@@ -16,9 +16,10 @@ export class GameSystem {
     this._pixiMain.addElementToMainScene(this._ship.container);
   }
 
-  public addElementToTick(element: () => void) {
+  public addShipToTick() {
     this._pixiMain.addListenerToTick(() => {
-      element();
+      this._ship.move()
+      this._ship.rotate()
     });
   }
 
