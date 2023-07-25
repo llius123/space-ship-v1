@@ -78,6 +78,7 @@ export class Ship {
   }
 
   public move() {
+
     if (!this.keysPressed || Object.keys(this.keysPressed).length === 0) {
       return;
     }

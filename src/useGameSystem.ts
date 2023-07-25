@@ -20,16 +20,8 @@ export const useGameSystem = ({
   }, []);
 
   const addShip = async (): Promise<void> => {
-    await addShipToGame();
-    addShipMovement();
-  };
-
-  const addShipToGame = async (): Promise<void> => {
     await gameSystem?.addShipToGame();
-  };
-
-  const addShipMovement = (): void => {
-    gameSystem?.addShipToTick();
+    gameSystem?.addShipMovement();
   };
 
   return { loading, addShip };
