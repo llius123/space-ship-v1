@@ -1,16 +1,19 @@
 import { Bullet } from "./Bullet/Bullet";
 import { PixiMain } from "./PixiMain";
 import { Ship } from "./Ship/Ship";
-import { useGameSystem } from "./useGameSystem";
+import { useGameSystem } from "./useGameSystemV2";
 
 function Game({ container }: { container: HTMLDivElement }) {
-  const { loading, addShip } = useGameSystem({ container, document });
+  // const { loading, addShip } = useGameSystem({ container, document });
+  const { loading, gameSystem } = useGameSystem({ container, document })
 
   if (loading) {
     return <></>;
   }
 
-  addShip();
+  gameSystem?.loadShip()
+
+  // addShip();
 
   // const pixiMain: PixiMain = new PixiMain(container);
 

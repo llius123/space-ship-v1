@@ -57,13 +57,13 @@ export class Bullet {
     // Normalize the direction vector
     const length = Math.sqrt(
       this._direction.x * this._direction.x +
-        this._direction.y * this._direction.y
+      this._direction.y * this._direction.y
     );
     this._direction.x /= length;
     this._direction.y /= length;
 
-    this._container.x += this._direction.x * speed;
-    this._container.y += this._direction.y * speed;
+    this._container.position.x += this._direction.x * speed;
+    this._container.position.y += this._direction.y * speed;
   }
 
   public readyToMove(angle: number, position: PIXI.ObservablePoint) {

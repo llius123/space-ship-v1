@@ -111,11 +111,11 @@ export class Ship {
     this._container.angle = degrees - 90;
   }
 
-  public click(callback: (angle: number) => void) {
+  public click(callback: (angle: number, position: PIXI.ObservablePoint) => void) {
     if (!this.clicked) {
       return;
     }
-    callback(this._container.angle);
+    callback(this._container.angle, this._container.position);
 
     this.clicked = false;
   }
