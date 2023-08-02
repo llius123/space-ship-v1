@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { GameSystem } from "./GameSystem";
 import * as PIXI from "pixi.js";
+import { GameSystem } from "./GameSystem";
+import { UIHelp } from "./UIHelp/UIHelp";
 
 export const useGameSystem = ({
   container,
@@ -15,14 +16,13 @@ export const useGameSystem = ({
 
   useEffect(() => {
     const gameSystem = new GameSystem(container, document);
-    setGameSystem(gameSystem);
-    setLoading(false);
+
+    gameSystem.loadUIHelp()
+    gameSystem.loadAssets().then(() => {
+      setLoading(false);
+      setGameSystem(gameSystem);
+    })
   }, []);
 
-  const addShip = async (): Promise<void> => {
-    await gameSystem?.addShipToGame();
-    gameSystem?.addShipMovement();
-  };
-
-  return { loading, addShip };
+  return { loading, gameSystem };
 };
